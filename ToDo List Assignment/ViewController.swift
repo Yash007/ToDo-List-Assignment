@@ -108,10 +108,12 @@ class ViewController: UITableViewController {
     }
     
     private func addNewToDoItem(title: String)  {
-        let newIndex = todo.count
-        todo.append(ToDo(title: title))
-        
-        tableView.insertRows(at: [IndexPath(row: newIndex, section: 0)], with: .top)
+        if  title != "" {
+            let newIndex = todo.count
+            todo.append(ToDo(title: title))
+            
+            tableView.insertRows(at: [IndexPath(row: newIndex, section: 0)], with: .top)
+        }
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
