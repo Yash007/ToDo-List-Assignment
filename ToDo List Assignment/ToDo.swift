@@ -41,7 +41,52 @@ class ToDo: NSObject, NSCoding {
 
 extension ToDo  {
     public class func getMockData() -> [ToDo]   {
-        return[
-        ]
+        return[]
+    }
+}
+
+extension Collection where Iterator.Element == ToDo {
+    
+    private static func persistencePath() -> URL?
+    {
+        let url = try? FileManager.default.url(
+            for: .applicationSupportDirectory,
+            in: .userDomainMask,
+            appropriateFor: nil,
+            create: true)
+        
+        return url?.appendingPathComponent("todo.bin")
+    }
+    
+    func writeToPersistence() throws
+    {
+        if let url = Self.persistencePath(), let array = self as? NSArray
+        {
+            let data = NSKeyedArchiver.archivedData(withRootObject: array)
+            try data.write(to: url)
+        }
+        else
+        {
+            throw NSError(domain: "sompurayash.ToDo-List-Assignment", code: 10, userInfo: nil)
+        }
+    }
+    
+    static func readFromPersistence() throws -> [ToDo]
+    {
+        if let url = persistencePath(), let data = (try Data(contentsOf: url) as Data?)
+        {
+            if let array = NSKeyedUnarchiver.unarchiveObject(with: data) as? [ToDo]
+            {
+                return array
+            }
+            else
+            {
+                throw NSError(domain: "sompurayash.ToDo-List-Assignment", code: 11, userInfo: nil)
+            }
+        }
+        else
+        {
+            throw NSError(domain: "sompurayash.ToDo-List-Assignment", code: 12, userInfo: nil)
+        }
     }
 }

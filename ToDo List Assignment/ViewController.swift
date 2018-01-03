@@ -18,6 +18,36 @@ class ViewController: UITableViewController {
         self.title = "ToDo List"
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(ViewController.didTapAddItemButton(_:)))
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(UIApplicationDelegate.applicationDidEnterBackground(_:)),
+            name: NSNotification.Name.UIApplicationDidEnterBackground,
+            object: nil)
+        
+        do  {
+            self.todo = try [ToDo].readFromPersistence()
+        }
+        catch let error as NSError
+        {
+            if error.domain == NSCocoaErrorDomain && error.code == NSFileReadNoSuchFileError
+            {
+                NSLog("No persistence file found.")
+            }
+            else
+            {
+                let alert = UIAlertController(
+                    title: "Error",
+                    message: "Could not load the to-do items!",
+                    preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                
+                self.present(alert, animated: true, completion: nil)
+                
+                NSLog("Error loading from persistence: \(error)")
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,8 +89,8 @@ class ViewController: UITableViewController {
     
     @objc func didTapAddItemButton(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(
-            title: "New To-do item",
-            message: "Insert the title of new to-do item:",
+            title: "Add New Item",
+            message: "Enter Item Name:",
             preferredStyle: .alert
         )
         
@@ -68,7 +98,7 @@ class ViewController: UITableViewController {
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: {  (_) in
+        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: {  (_) in
             if let title = alert.textFields?[0].text    {
                 self.addNewToDoItem(title: title)
             }
@@ -88,6 +118,18 @@ class ViewController: UITableViewController {
         if indexPath.row < todo.count   {
             todo.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .top)
+        }
+    }
+    
+    public func applicationDidEnterBackground(_ notification: NSNotification)
+    {
+        do
+        {
+            try todo.writeToPersistence()
+        }
+        catch let error
+        {
+            NSLog("Error writing to persistence: \(error)")
         }
     }
 }
