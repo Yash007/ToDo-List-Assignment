@@ -13,6 +13,7 @@
 		4113C0F51FFD80390067D11F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4113C0F41FFD80390067D11F /* Assets.xcassets */; };
 		4113C0F81FFD80390067D11F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4113C0F61FFD80390067D11F /* LaunchScreen.storyboard */; };
 		4113C1031FFD80390067D11F /* ToDo_List_AssignmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4113C1021FFD80390067D11F /* ToDo_List_AssignmentTests.swift */; };
+		4113C10E1FFD82A60067D11F /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4113C10D1FFD82A60067D11F /* ToDo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		4113C0FE1FFD80390067D11F /* ToDo List AssignmentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ToDo List AssignmentTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4113C1021FFD80390067D11F /* ToDo_List_AssignmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDo_List_AssignmentTests.swift; sourceTree = "<group>"; };
 		4113C1041FFD80390067D11F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4113C10D1FFD82A60067D11F /* ToDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			children = (
 				4113C0ED1FFD80390067D11F /* AppDelegate.swift */,
 				4113C0EF1FFD80390067D11F /* ViewController.swift */,
+				4113C10D1FFD82A60067D11F /* ToDo.swift */,
 				4113C0F11FFD80390067D11F /* Main.storyboard */,
 				4113C0F41FFD80390067D11F /* Assets.xcassets */,
 				4113C0F61FFD80390067D11F /* LaunchScreen.storyboard */,
@@ -199,6 +202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4113C10E1FFD82A60067D11F /* ToDo.swift in Sources */,
 				4113C0F01FFD80390067D11F /* ViewController.swift in Sources */,
 				4113C0EE1FFD80390067D11F /* AppDelegate.swift in Sources */,
 			);
