@@ -21,11 +21,6 @@ class ToDo  {
 extension ToDo  {
     public class func getMockData() -> [ToDo]   {
         return[
-            ToDo(title: "Milk"),
-            ToDo(title: "Egg"),
-            ToDo(title: "Chocolate"),
-            ToDo(title: "Bread"),
-            ToDo(title: "Apple")
         ]
     }
 }
