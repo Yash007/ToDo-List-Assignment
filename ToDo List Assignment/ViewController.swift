@@ -71,6 +71,15 @@ class ViewController: UITableViewController {
             cell.textLabel?.text = item.title
             
             let accessory: UITableViewCellAccessoryType = item.done ? .checkmark : .none
+            
+            if(accessory == .checkmark) {
+                cell.selectionStyle = UITableViewCellSelectionStyle.default
+                cell.isUserInteractionEnabled = false
+            }
+            else    {
+                cell.selectionStyle = UITableViewCellSelectionStyle.blue
+                cell.isUserInteractionEnabled = true
+            }
             cell.accessoryType = accessory
         }
         
