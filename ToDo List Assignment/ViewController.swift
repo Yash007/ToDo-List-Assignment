@@ -10,7 +10,9 @@ import UIKit
 
 class ViewController: UITableViewController {
 
-    private var todo = ToDo.getMockData()
+    private var todo = [ToDo]()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -50,6 +52,19 @@ class ViewController: UITableViewController {
         }
     }
 
+    @objc
+    public func applicationDidEnterBackground(_ notification: NSNotification)
+    {
+        do
+        {
+            try todo.writeToPersistence()
+        }
+        catch let error
+        {
+            NSLog("Error writing to persistence: \(error)")
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -107,7 +122,8 @@ class ViewController: UITableViewController {
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
-        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: {  (_) in
+        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: {
+            (_) in
             if let title = alert.textFields?[0].text    {
                 self.addNewToDoItem(title: title)
             }
@@ -132,16 +148,6 @@ class ViewController: UITableViewController {
         }
     }
     
-    public func applicationDidEnterBackground(_ notification: NSNotification)
-    {
-        do
-        {
-            try todo.writeToPersistence()
-        }
-        catch let error
-        {
-            NSLog("Error writing to persistence: \(error)")
-        }
-    }
+   
 }
 
